@@ -2,8 +2,15 @@ import express from "express";
 
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (request, response) => {
     return response.json({ message: 'Hello my friendo' });
 })
 
-app.listen(3333);
+app.post('/courses', (request, response) => {
+    const {name} = request.body;
+    return response.json({name});
+});
+
+app.listen(3333, () => console.log('Server is running!\nListening on port 3333'));
