@@ -1,9 +1,8 @@
 import { parse } from "csv-parse";
 import fs from "fs";
 
-import { ImportCategoryController } from "../controllers/ImportCategoryController";
-import { ICategoryRepository } from "../repositories/ICategoriesRepository";
-import { CategoriesRepository } from "../repositories/implementations/CategoriesRepository";
+import { ICategoryRepository } from "../../repositories/ICategoriesRepository";
+import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
 
 interface IImporteCategory {
     name: string;
@@ -57,8 +56,4 @@ class ImportCategoryUseCase {
     }
 }
 
-const categoriesRepository = CategoriesRepository.getInstance();
-const importCategoryUseCase = new ImportCategoryUseCase(categoriesRepository);
-const importCategoryController = new ImportCategoryController(importCategoryUseCase);
-
-export { importCategoryController, ImportCategoryUseCase }
+export { ImportCategoryUseCase };
