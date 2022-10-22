@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
-import { CreateSpecificationService } from "../services/CreateSpecificationService";
+import { CreateSpecificationUseCase } from "./CreateSpecificationUseCase";
 
 class CreateSpecificationController {
 
-    constructor(private createSpecificationService: CreateSpecificationService) { }
+    constructor(private createSpecificationUseCase: CreateSpecificationUseCase) { }
     handle(request: Request, response: Response): Response {
         const { name, description } = request.body;
 
-        this.createSpecificationService.execute({ name, description });
+        this.createSpecificationUseCase.execute({ name, description });
 
         return response.status(201).send();
     }
