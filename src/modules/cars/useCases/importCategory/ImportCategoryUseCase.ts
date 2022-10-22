@@ -1,16 +1,20 @@
+import { inject, injectable } from "tsyringe";
 import { parse } from "csv-parse";
 import fs from "fs";
 
 import { ICategoryRepository } from "../../repositories/ICategoriesRepository";
-import { CategoriesRepository } from "../../repositories/implementations/CategoriesRepository";
 
 interface IImporteCategory {
     name: string;
     description: string;
 }
 
+@injectable()
 class ImportCategoryUseCase {
-    constructor(private categoriesRepository: ICategoryRepository) { }
+    constructor(
+        @inject("CategoriesRepository")
+        private categoriesRepository: ICategoryRepository
+    ) { }
 
     loadCategories(file: any): Promise<IImporteCategory[]> {
         return new Promise((resolve, reject) => {
