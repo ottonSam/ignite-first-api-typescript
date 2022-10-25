@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 import { AppError } from "../../../../errors/AppError";
 
 import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { deleteFile } from "../../../../utils/file";
 
 interface IRequest {
     user_id: string;
@@ -20,6 +21,10 @@ class UpdateUserAvatarUseCase {
 
         if (!user) {
             throw new AppError("User not found", 404);
+        }
+
+        if (user.avatar) {
+            await deleteFile(`./tmp/avatar/${user.avatar}`);
         }
 
         user.avatar = avatar_file;
